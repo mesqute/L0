@@ -11,7 +11,6 @@ func GetRoutes() *http.ServeMux {
 
 	mux.HandleFunc("/", home)
 	mux.HandleFunc("/data", getData)
-	mux.HandleFunc("/data/create", setData)
 
 	return mux
 }

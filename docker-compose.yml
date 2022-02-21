@@ -7,6 +7,7 @@ services:
       - "8080:8080"
     depends_on:
       - db
+      - nats-str
     environment:
       - DB_PASSWORD=0000
 
@@ -19,5 +20,11 @@ services:
       - POSTGRES_PASSWORD=0000
     ports:
       - "5432:5432"
+  nats-str:
+    image: nats-streaming:latest
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+
 volumes:
   db:
