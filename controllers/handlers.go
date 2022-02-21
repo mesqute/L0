@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"text/template"
 )
 
 // home обрабатывает запросы на отображение интерфейса
@@ -14,6 +15,20 @@ func home(w http.ResponseWriter, r *http.Request) {
 	// проверка на соответствие обрабатываемому методу Get
 	if r.Method != http.MethodGet {
 		u.ErrorMethodNotAllowed(w, http.MethodGet)
+		return
+	}
+	// добавляем файл главной страницы в обработчик
+	t, err := template.ParseFiles("./ui/html/index.html")
+	if err != nil {
+		err = errs.New("[home] " + err.Error())
+		errs.HandleError(w, err)
+		return
+	}
+	// возвращаем обработанный файл главной страницы
+	err = t.Execute(w, nil)
+	if err != nil {
+		err = errs.New("[home] " + err.Error())
+		errs.HandleError(w, err)
 		return
 	}
 }

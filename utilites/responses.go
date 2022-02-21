@@ -22,8 +22,8 @@ func ErrorMethodNotAllowed(w http.ResponseWriter, allowMethods ...string) {
 
 // Respond формирует и отправляет ответ в формате JSON
 func Respond(w http.ResponseWriter, status int, data interface{}) error {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(status)
-	w.Header().Add("Content-Type", "application/json")
 	err := json.NewEncoder(w).Encode(data)
 	if err != nil {
 		err = errs.New("[Respond] " + err.Error())
