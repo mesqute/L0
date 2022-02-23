@@ -1,3 +1,4 @@
+
 {
   "order_uid": "b563feb72b84b6test",
   "track_number": "WBILMTESTTRACK",
@@ -5,7 +6,11 @@
   "delivery": {
     "name": "Test Testov",
     "phone": "+9720000000",
-    "zip": "2639809"
+    "zip": "2639809",
+    "city": "Kiryat Mozkin",
+    "address": "Ploshad Mira 15",
+    "region": "Kraiot",
+    "email": "test@gmail.com"
   },
   "payment": {
     "transaction": "b563feb7b2b84b6test",
@@ -47,7 +52,7 @@
       "status": 202
     },
     {
-      "chrt_id": 993490,
+      "chrt_id": 99490,
       "track_number": "WBILMTESTTRACK",
       "price": 453,
       "rid": "ab4219087a764ae0btest",

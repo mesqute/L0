@@ -33,7 +33,7 @@ func (t ErrorType) New(msg string) error {
 	}
 }
 
-// New создает новый customError с не указанным ErrorType
+// New создает новый customError с неуказанным ErrorType
 func New(msg string) error {
 	return customError{
 		errorType:     NoType,

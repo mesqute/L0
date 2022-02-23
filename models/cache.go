@@ -43,6 +43,11 @@ func (c *Cache) SetCacheData(data map[string]Order) {
 // Get возвращает данные из кэша по id.
 // Если не находит данные, то возвращает ошибку.
 func (c *Cache) Get(id string) (Order, error) {
+	//проверем, инициализирован ли кеш
+	if c.data == nil {
+		err := errs.New("[Cache.Get] кеш не инициализирован")
+		return Order{}, err
+	}
 
 	// используем блокировку для чтения (не блокирует чтение для остальных, но блокирует запись)
 	c.mtx.RLock()
@@ -63,9 +68,15 @@ func (c *Cache) Get(id string) (Order, error) {
 func (c *Cache) Insert(data Order) error {
 	id := data.OrderUid
 
+	//проверем, инициализирован ли кеш
+	if c.data == nil {
+		err := errs.New("[Cache.Get] кеш не инициализирован")
+		return err
+	}
+
 	// проверка, существуют ли в кэше данные с таким же id.
 	// если существуют, то возвращаем ошибку
-	if _, err := c.Get(id); err == nil {
+	if _, ok := c.data[id]; ok {
 		err := errs.BadRequest.New("[Cache.Insert]: data already exist")
 		err = errs.AddErrorContext(err, "Данные с таким id уже существуют")
 		return err
